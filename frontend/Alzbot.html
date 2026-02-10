@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alzbot - Alzheimer's Info Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #dbeafe; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .chat-container { max-width: 400px; width: 100%; background: #ffffff; border: 2px solid #3b82f6; border-radius: 15px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow: hidden; display: flex; flex-direction: column; }
+        .chat-header { background: #3b82f6; color: white; padding: 15px; text-align: center; font-size: 1.8rem; font-weight: bold; }
+        #chatbox { flex-grow: 1; padding: 10px; overflow-y: auto; background: #f3f4f6; border-bottom: 2px solid #3b82f6; max-height: 300px; }
+        .input-container { display: flex; border-top: 2px solid #3b82f6; }
+        #userInput { flex: 1; padding: 12px; border: none; border-right: 1px solid #3b82f6; box-sizing: border-box; font-size: 1rem; }
+        #sendButton { padding: 12px; background: #3b82f6; color: white; border: none; cursor: pointer; font-size: 1rem; }
+        #sendButton:hover { background: #2563eb; }
+        .message { padding: 8px; margin: 5px; border-radius: 10px; max-width: 80%; }
+        .user-message { background: #2563eb; color: white; align-self: flex-end; }
+        .bot-message { background: #e5e7eb; color: black; align-self: flex-start; }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">ALZBOT</div>
+        <div id="chatbox"></div>
+        <div class="input-container">
+            <input type="text" id="userInput" placeholder="Ask about Alzheimer's..." autofocus>
+            <button id="sendButton">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const responses = {
+            "what is alzheimer's": "Alzheimer's is a progressive neurological disorder that causes brain cells to degenerate and die, leading to memory loss and cognitive decline.",
+            "what are symptoms": "Symptoms include memory loss, confusion, difficulty in completing familiar tasks, mood changes, and withdrawal from social activities.",
+            "how to get treatment": "There is no cure for Alzheimer's, but treatments include medications to manage symptoms, cognitive therapy, and supportive care.",
+            "what are the causes": "The exact cause is unknown, but factors such as age, genetics, lifestyle, and environmental factors play a role.",
+            "what are the stages": "Alzheimer's progresses in stages: early (mild memory loss), middle (increased confusion and assistance needed), and late (severe cognitive decline and dependency).",
+            "how to prevent": "Prevention strategies include staying mentally active, eating a balanced diet, exercising regularly, and maintaining social connections.",
+            "how to diagnose": "Diagnosis is done through medical history, cognitive tests, brain imaging, and sometimes genetic testing.",
+            "what are care options": "Care options range from in-home care, assisted living, memory care facilities, to hospice care in advanced stages.",
+            "what support groups are available": "There are numerous support groups available, both online and in-person, providing emotional support and resources for patients and caregivers.",
+            "what diet is good": "A brain-healthy diet includes leafy greens, berries, whole grains, nuts, fish, and olive oil, similar to the Mediterranean diet.",
+            "bye": "Goodbye! Remember, support and understanding make a big difference in Alzheimer's care. Take care."
+        };
+
+        function addMessage(sender, message, isUser = false) {
+            const chatbox = document.getElementById('chatbox');
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('message');
+            msgDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+            msgDiv.textContent = `${sender}: ${message}`;
+            chatbox.appendChild(msgDiv);
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+        function handleUserInput() {
+            const userInput = document.getElementById('userInput');
+            const userMessage = userInput.value.trim().toLowerCase();
+            if (userMessage) {
+                addMessage('You', userMessage, true);
+                userInput.value = '';
+                const response = responses[userMessage] || "I'm sorry, I don't understand that. Please ask something else about Alzheimer's.";
+                setTimeout(() => addMessage('Alzbot', response, false), 500);
+            }
+        }
+
+        document.getElementById('userInput').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                handleUserInput();
+            }
+        });
+
+        document.getElementById('sendButton').addEventListener('click', handleUserInput);
+    </script>
+</body>
+</html>

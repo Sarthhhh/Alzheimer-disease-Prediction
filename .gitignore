@@ -1,0 +1,37 @@
+# Python & Backend
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+venv_mac/
+.env
+db.sqlite3
+*.db
+backend/uploads/
+backend/db.sqlite3
+
+# Large Model Files
+# Note: .keras file is needed for deployment, keeping it tracked
+# *.h5  # Only need .keras format
+*.h5
+
+# Frontend
+node_modules/
+dist/
+build/
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Datasets
+Alzheimer_s Dataset/
+Alzheimer's_CNN_Model.ipynb # Optional: Notebooks can be large or contain output
+
+# IDEs
+.vscode/
+.idea/
+
+# Legacy
+alzheimer-detection-ui/
