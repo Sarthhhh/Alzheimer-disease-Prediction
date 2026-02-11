@@ -63,7 +63,7 @@ except Exception as e:
     cnn_model = None
 
 # Configure Gemini API (Replace with your API key)
-genai.configure(api_key="AIzaSyBctRA3rZ6ZM6v6xjvYdZk1XKtjmGEGW_4")
+genai.configure(api_key="GOOGLE_API_KEY")
 
 def preprocess_image(img_path):
     print(f"Preprocessing image at {img_path}")
